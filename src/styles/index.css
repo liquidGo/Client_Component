@@ -1,0 +1,156 @@
+/* 组件库全局样式 */
+
+/* Less 变量定义 */
+@primary: #3b82f6;
+@primary-hover: #2563eb;
+@primary-light: #dbeafe;
+
+@secondary: #6b7280;
+@secondary-hover: #4b5563;
+
+@success: #10b981;
+@warning: #f59e0b;
+@error: #ef4444;
+@info: #3b82f6;
+
+@white: #ffffff;
+@gray-50: #f9fafb;
+@gray-100: #f3f4f6;
+@gray-200: #e5e7eb;
+@gray-300: #d1d5db;
+@gray-400: #9ca3af;
+@gray-500: #6b7280;
+@gray-600: #4b5563;
+@gray-700: #374151;
+@gray-800: #1f2937;
+@gray-900: #111827;
+
+@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+@font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+@spacing-xs: 4px;
+@spacing-sm: 8px;
+@spacing-md: 16px;
+@spacing-lg: 24px;
+@spacing-xl: 32px;
+
+@radius-sm: 4px;
+@radius-md: 6px;
+@radius-lg: 8px;
+@radius-xl: 12px;
+
+@shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+@shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+@shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+@shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+@transition: all 0.2s ease-in-out;
+@transition-fast: all 0.15s ease-in-out;
+@transition-slow: all 0.3s ease-in-out;
+
+/* CSS 变量定义（保持向后兼容） */
+:root {
+  --compo-primary: @primary;
+  --compo-primary-hover: @primary-hover;
+  --compo-primary-light: @primary-light;
+  
+  --compo-secondary: @secondary;
+  --compo-secondary-hover: @secondary-hover;
+  
+  --compo-success: @success;
+  --compo-warning: @warning;
+  --compo-error: @error;
+  --compo-info: @info;
+  
+  --compo-white: @white;
+  --compo-gray-50: @gray-50;
+  --compo-gray-100: @gray-100;
+  --compo-gray-200: @gray-200;
+  --compo-gray-300: @gray-300;
+  --compo-gray-400: @gray-400;
+  --compo-gray-500: @gray-500;
+  --compo-gray-600: @gray-600;
+  --compo-gray-700: @gray-700;
+  --compo-gray-800: @gray-800;
+  --compo-gray-900: @gray-900;
+  
+  --compo-font-family: @font-family;
+  --compo-font-mono: @font-mono;
+  
+  --compo-spacing-xs: @spacing-xs;
+  --compo-spacing-sm: @spacing-sm;
+  --compo-spacing-md: @spacing-md;
+  --compo-spacing-lg: @spacing-lg;
+  --compo-spacing-xl: @spacing-xl;
+  
+  --compo-radius-sm: @radius-sm;
+  --compo-radius-md: @radius-md;
+  --compo-radius-lg: @radius-lg;
+  --compo-radius-xl: @radius-xl;
+  
+  --compo-shadow-sm: @shadow-sm;
+  --compo-shadow-md: @shadow-md;
+  --compo-shadow-lg: @shadow-lg;
+  --compo-shadow-xl: @shadow-xl;
+  
+  --compo-transition: @transition;
+  --compo-transition-fast: @transition-fast;
+  --compo-transition-slow: @transition-slow;
+}
+
+/* 重置样式 */
+.compo-reset {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* 基础样式 */
+.compo-base {
+  font-family: var(--compo-font-family);
+  line-height: 1.5;
+  color: var(--compo-gray-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 工具类 */
+.compo-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.compo-focus-visible {
+  outline: 2px solid var(--compo-primary);
+  outline-offset: 2px;
+}
+
+/* 响应式断点 */
+@media (max-width: 640px) {
+  .compo-responsive-sm {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .compo-responsive-md {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  .compo-responsive-lg {
+    font-size: 16px;
+  }
+}

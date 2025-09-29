@@ -1,0 +1,165 @@
+/* 应用主样式 */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.app-header h1 {
+  font-size: 3rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* 演示区域样式 */
+.demo-section {
+  background: white;
+  /* border-radius: 12px; */
+  padding: 24px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  margin-bottom: 30px;
+}
+
+.demo-section h2 {
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* 主演示卡片样式 */
+.main-demo-card {
+  margin-bottom: 20px;
+}
+
+.demo-section h3 {
+  color: #374151;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d1d5db;
+}
+
+/* 演示项样式 */
+.demo-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  background: #f9fafb;
+  margin-bottom: 16px;
+}
+
+.demo-item h4 {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d1d5db;
+}
+
+/* 数据展示样式 */
+.data-display {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .app-header p {
+    font-size: 1rem;
+  }
+
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-section {
+    padding: 16px;
+  }
+}
+
+/* EditContent 组件样式优化 */
+.demo-grid .ant-input,
+.demo-grid .ant-select,
+.demo-grid .ant-input-number {
+  border-radius: 6px;
+}
+
+.demo-grid .ant-btn {
+  border-radius: 6px;
+}
+
+/* 自定义样式 */
+.demo-grid span {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.demo-grid span:hover {
+  background-color: #f3f4f6;
+}
+
+.app .ant-collapse-header {
+  background-color: #fff;
+  border-radius: 0 !important;
+  border-radius: 8px 8px 0 0 !important;
+
+}
+
+.app .ant-collapse {
+  background-color: #fff;
+  border-radius: 0 !important;
+  border-radius: 8px 8px 0 0 !important;
+
+}
