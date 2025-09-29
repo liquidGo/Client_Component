@@ -10,6 +10,8 @@
 - [ ] 更新了package.json中的版本号
 - [ ] 更新了README.md
 - [ ] 确保所有测试通过
+- [ ] https://registry.npmjs.org/ 
+- [ ] https://registry.npmmirror.com/
 
 ### 2. 构建组件库
 
