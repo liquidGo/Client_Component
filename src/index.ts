@@ -35,5 +35,5 @@ export { default as EditContent } from './components/EditContent';
 //   CardRenderProps
 // } from './components/Card'
 
-// // 导出样式
-// import './styles/index.less'
+// 导出样式
+import './styles/index.less'

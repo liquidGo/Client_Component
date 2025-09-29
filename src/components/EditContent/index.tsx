@@ -6,25 +6,25 @@ import { EditOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 /* ================== 类型定义 ================== */
 interface EditContextValue {
   isEditing: boolean;
-  value: any;
+  value: string | number | boolean | string[] | Date | null | undefined;
   onEdit: () => void;
   onSave: () => void;
   onCancel: () => void;
-  onChange: (value: any) => void;
+  onChange: (value: string | number | boolean | string[] | Date | null | undefined) => void;
   disabled?: boolean;
   loading?: boolean;
 }
 
 interface EditContentProps {
-  value?: any;
-  onSave?: (value: any) => void;
-  onCancel?: (value: any) => void;
-  onClick?: (value: any) => void;
+  value?: string | number | boolean | string[] | Date | null | undefined;
+  onSave?: (value: string | number | boolean | string[] | Date | null | undefined) => void;
+  onCancel?: (value: string | number | boolean | string[] | Date | null | undefined) => void;
+  onClick?: (value: string | number | boolean | string[] | Date | null | undefined) => void;
   disabled?: boolean;
   loading?: boolean;
   autoSave?: boolean;
   saveDelay?: number;
-  children: (props: { isEditing: boolean; value: any; disabled: boolean; loading: boolean }) => ReactNode;
+  children: (props: { isEditing: boolean; value: string | number | boolean | string[] | Date | null | undefined; disabled: boolean; loading: boolean }) => ReactNode;
 }
 
 interface EditableTextProps {
@@ -36,7 +36,7 @@ interface EditableTextProps {
 }
 
 interface EditableSelectProps {
-  options: Array<{ label: string; value: any; disabled?: boolean }>;
+  options: Array<{ label: string; value: string | number; disabled?: boolean }>;
   placeholder?: string;
   allowClear?: boolean;
   disabled?: boolean;
@@ -123,20 +123,20 @@ const EditContentRoot: React.FC<EditContentProps> = ({
     onCancelProp?.(value);
   };
 
-  const handleChange = (newValue: any) => {
+  const handleChange = (newValue: string | number | boolean | string[] | Date | null | undefined) => {
     if (disabled || loading) return;
     setTempValue(newValue);
     
-    // 自动保存逻辑
-    if (autoSave) {
-      if (saveTimer) {
-        clearTimeout(saveTimer);
+      // 自动保存逻辑
+      if (autoSave) {
+        if (saveTimer) {
+          clearTimeout(saveTimer);
+        }
+        const timer = window.setTimeout(() => {
+          handleSave();
+        }, saveDelay);
+        setSaveTimer(timer);
       }
-      const timer = setTimeout(() => {
-        handleSave();
-      }, saveDelay);
-      setSaveTimer(timer);
-    }
   };
 
   const handleClick = () => {
@@ -242,7 +242,7 @@ const EditableText: React.FC<EditableTextProps> = ({
   if (isEditing) {
     return (
       <Input
-        value={value}
+        value={String(value || '')}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         maxLength={maxLength}
@@ -256,13 +256,13 @@ const EditableText: React.FC<EditableTextProps> = ({
   }
 
   return (
-    <span style={{ 
-      minHeight: 22, 
-      display: 'inline-block', 
+    <span style={{
+      minHeight: 22,
+      display: 'inline-block',
       lineHeight: '22px',
       opacity: disabled ? 0.6 : 1
     }}>
-      {value || placeholder || '点击编辑'}
+      {String(value || placeholder || '点击编辑')}
     </span>
   );
 };
@@ -323,20 +323,20 @@ const EditableNumber: React.FC<EditableNumberProps> = ({
 
   if (isEditing) {
     return (
-      <InputNumber
-        value={value}
-        onChange={onChange}
-        min={min}
-        max={max}
-        precision={precision}
-        step={step}
-        placeholder={placeholder}
-        disabled={disabled}
-        formatter={formatter}
-        parser={parser}
-        style={{ minWidth: 120 }}
-        autoFocus
-      />
+        <InputNumber
+          value={typeof value === 'number' ? value : undefined}
+          onChange={onChange}
+          min={min}
+          max={max}
+          precision={precision}
+          step={step}
+          placeholder={placeholder}
+          disabled={disabled}
+          formatter={formatter}
+          parser={parser}
+          style={{ minWidth: 120 }}
+          autoFocus
+        />
     );
   }
 
@@ -347,7 +347,7 @@ const EditableNumber: React.FC<EditableNumberProps> = ({
       lineHeight: '22px',
       opacity: disabled ? 0.6 : 1
     }}>
-      {value !== undefined && value !== null ? value : placeholder || '点击编辑'}
+{String(value !== undefined && value !== null ? value : placeholder || '点击编辑')}
     </span>
   );
 };
@@ -367,19 +367,19 @@ const EditableTextArea: React.FC<EditableTextAreaProps> = ({
 
   if (isEditing) {
     return (
-      <Input.TextArea
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        showCount={showCount}
-        allowClear={allowClear}
-        disabled={disabled}
-        rows={rows}
-        autoSize={autoSize}
-        style={{ minWidth: 200 }}
-        autoFocus
-      />
+        <Input.TextArea
+          value={String(value || '')}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          showCount={showCount}
+          allowClear={allowClear}
+          disabled={disabled}
+          rows={rows}
+          autoSize={autoSize}
+          style={{ minWidth: 200 }}
+          autoFocus
+        />
     );
   }
 
@@ -391,7 +391,7 @@ const EditableTextArea: React.FC<EditableTextAreaProps> = ({
       opacity: disabled ? 0.6 : 1,
       whiteSpace: 'pre-wrap'
     }}>
-      {value || placeholder || '点击编辑'}
+{String(value || placeholder || '点击编辑')}
     </span>
   );
 };
@@ -413,8 +413,8 @@ const Display: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 /* ================== 自定义编辑组件 ================== */
 const Custom: React.FC<{
-  renderDisplay: (value: any) => ReactNode;
-  renderEdit: (value: any, onChange: (value: any) => void) => ReactNode;
+  renderDisplay: (value: string | number | boolean | string[] | Date | null | undefined) => ReactNode;
+  renderEdit: (value: string | number | boolean | string[] | Date | null | undefined, onChange: (value: string | number | boolean | string[] | Date | null | undefined) => void) => ReactNode;
 }> = ({ renderDisplay, renderEdit }) => {
   const { isEditing, value, onChange } = useEditContext();
 
@@ -437,10 +437,10 @@ type EditContentCompound = React.FC<EditContentProps> & {
   Select: React.FC<EditableSelectProps>;
   Number: React.FC<EditableNumberProps>;
   Display: React.FC<{ children: ReactNode }>;
-  Custom: React.FC<{
-    renderDisplay: (value: any) => ReactNode;
-    renderEdit: (value: any, onChange: (value: any) => void) => ReactNode;
-  }>;
+      Custom: React.FC<{
+        renderDisplay: (value: string | number | boolean | string[] | Date | null | undefined) => ReactNode;
+        renderEdit: (value: string | number | boolean | string[] | Date | null | undefined, onChange: (value: string | number | boolean | string[] | Date | null | undefined) => void) => ReactNode;
+      }>;
 };
 
 const EditContent = EditContentRoot as EditContentCompound;

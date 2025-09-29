@@ -6,16 +6,16 @@ import './App.css'
 
 function App() {
   const [userInfo, setUserInfo] = useState({
-    name: '张三',
-    email: 'zhangsan@example.com',
-    age: 25,
-    city: 'beijing',
-    bio: '这是一个个人简介，可以点击编辑',
-    salary: 15000,
-    skills: ['react', 'typescript'],
-    isActive: true,
-    rating: 4.5,
-    joinDate: dayjs('2023-01-01')
+    name: '张三' as string,
+    email: 'zhangsan@example.com' as string,
+    age: 25 as number,
+    city: 'beijing' as string,
+    bio: '这是一个个人简介，可以点击编辑' as string,
+    salary: 15000 as number,
+    skills: ['react', 'typescript'] as string[],
+    isActive: true as boolean,
+    rating: 4.5 as number,
+    joinDate: dayjs('2023-01-01') as any // eslint-disable-line @typescript-eslint/no-explicit-any
   })
 
   const cityOptions = [
@@ -38,12 +38,12 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>EditContent 组件演示</h1>
-        <p>一个基于Compound + Render Props模式的可编辑内容组件</p>
+        <h1>Jinyouyu UI 组件演示</h1>
+        <p>一个基于Compound + Render Props模式的可编辑内容组件库</p>
       </header>
 
       <main className="app-main">
-        <Collapse 
+        <Collapse
           items={[
             {
               key: '1',
@@ -57,7 +57,7 @@ function App() {
                       <Card title="文本编辑" size="small">
                         <EditContent
                           value={userInfo.name}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, name: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, name: value as string }))}
                         >
                           {() => (
                             <EditContent.Text
@@ -72,7 +72,7 @@ function App() {
                       <Card title="邮箱编辑" size="small">
                         <EditContent
                           value={userInfo.email}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, email: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, email: value as string }))}
                         >
                           {() => (
                             <EditContent.Text
@@ -85,7 +85,7 @@ function App() {
                       <Card title="年龄编辑" size="small">
                         <EditContent
                           value={userInfo.age}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, age: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, age: value as number }))}
                         >
                           {() => (
                             <EditContent.Number
@@ -100,7 +100,7 @@ function App() {
                       <Card title="城市选择" size="small">
                         <EditContent
                           value={userInfo.city}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, city: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, city: value as string }))}
                         >
                           {() => (
                             <EditContent.Select
@@ -121,7 +121,7 @@ function App() {
                       <Card title="多行文本编辑" size="small">
                         <EditContent
                           value={userInfo.bio}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, bio: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, bio: value as string }))}
                         >
                           {() => (
                             <EditContent.TextArea
@@ -137,7 +137,7 @@ function App() {
                       <Card title="薪资编辑（格式化）" size="small">
                         <EditContent
                           value={userInfo.salary}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, salary: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, salary: value as number }))}
                         >
                           {() => (
                             <EditContent.Number
@@ -155,7 +155,7 @@ function App() {
                       <Card title="多选技能" size="small">
                         <EditContent
                           value={userInfo.skills}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, skills: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, skills: value as string[] }))}
                         >
                           {() => (
                             <EditContent.Select
@@ -173,7 +173,7 @@ function App() {
                           value="自动保存文本"
                           autoSave
                           saveDelay={2000}
-                          onSave={(value) => console.log('自动保存:', value)}
+                          onSave={(value) => console.log('自动保存:', value as string)}
                         >
                           {() => (
                             <EditContent.Text
@@ -192,11 +192,11 @@ function App() {
                       <Card title="日期选择" size="small">
                         <EditContent
                           value={userInfo.joinDate}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, joinDate: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, joinDate: value as any }))} // eslint-disable-line @typescript-eslint/no-explicit-any
                         >
                           {() => (
                             <EditContent.Custom
-                              renderDisplay={(value) => value?.format('YYYY-MM-DD') || '选择日期'}
+                              renderDisplay={(value) => (value as any)?.format('YYYY-MM-DD') || '选择日期'} // eslint-disable-line @typescript-eslint/no-explicit-any
                               renderEdit={(value, onChange) => (
                                 <DatePicker
                                   value={value}
@@ -213,14 +213,14 @@ function App() {
                       <Card title="开关状态" size="small">
                         <EditContent
                           value={userInfo.isActive}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, isActive: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, isActive: value as boolean }))}
                         >
                           {() => (
                             <EditContent.Custom
-                              renderDisplay={(value) => value ? '激活' : '未激活'}
+                              renderDisplay={(value) => (value as boolean) ? '激活' : '未激活'}
                               renderEdit={(value, onChange) => (
                                 <Switch
-                                  checked={value}
+                                  checked={value as boolean}
                                   onChange={onChange}
                                 />
                               )}
@@ -232,14 +232,14 @@ function App() {
                       <Card title="评分编辑" size="small">
                         <EditContent
                           value={userInfo.rating}
-                          onSave={(value) => setUserInfo(prev => ({ ...prev, rating: value }))}
+                          onSave={(value) => setUserInfo(prev => ({ ...prev, rating: value as number }))}
                         >
                           {() => (
                             <EditContent.Custom
-                              renderDisplay={(value) => `${value} 星`}
+                              renderDisplay={(value) => `${value as number} 星`}
                               renderEdit={(value, onChange) => (
                                 <Rate
-                                  value={value}
+                                  value={value as number}
                                   onChange={onChange}
                                   allowHalf
                                 />
@@ -255,7 +255,7 @@ function App() {
                           loading
                           onSave={async (value) => {
                             await new Promise(resolve => setTimeout(resolve, 2000));
-                            console.log('保存:', value);
+                            console.log('保存:', value as string);
                           }}
                         >
                           {({ loading }) => (
@@ -277,7 +277,7 @@ function App() {
                         <EditContent
                           value="禁用状态"
                           disabled
-                          onSave={(value) => console.log('保存:', value)}
+                          onSave={(value) => console.log('保存:', value as string)}
                         >
                           {({ disabled }) => (
                             <EditContent.Text
